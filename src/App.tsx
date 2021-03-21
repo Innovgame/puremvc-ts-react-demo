@@ -20,6 +20,7 @@ class App extends React.PureComponent {
     componentDidMount() {
         // TODO: ...
         // console.log('app componentDidMount');
+        this.hiddenLoading();
     }
 
     hiddenLoading = () => {
@@ -38,11 +39,13 @@ class App extends React.PureComponent {
                     marginTop: '150px',
                 }}
             >
-                <Spin tip="Loading..." spinning={loading}>
+                {loading ? (
+                    <Spin tip="Loading..." />
+                ) : (
                     <div style={{ width: '300px' }}>
                         <Login />
                     </div>
-                </Spin>
+                )}
             </div>
         );
     }

@@ -9,6 +9,10 @@ export class LoginMediator extends Mediator {
         super(LoginMediator.NAME, viewComponent);
     }
 
+    onRegister(): void {
+        console.log('sssd');
+    }
+
     listNotificationInterests(): string[] {
         return [
             NotificationConstants.LOGIN_FAILED,
