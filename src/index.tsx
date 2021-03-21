@@ -4,12 +4,6 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import { ApplicationFacade } from './puremvc';
-
-const facade = ApplicationFacade.getInstance();
-const app = { name: 'hello world app' };
-facade.startup(app);
-
 ReactDOM.render(
     <React.StrictMode>
         <App />
