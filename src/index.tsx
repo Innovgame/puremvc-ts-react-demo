@@ -7,7 +7,8 @@ import reportWebVitals from './reportWebVitals';
 import { ApplicationFacade } from './puremvc';
 
 const facade = ApplicationFacade.getInstance();
-facade.startup({ name: 'hello world' });
+const app = { name: 'hello world app' };
+facade.startup(app);
 
 ReactDOM.render(
     <React.StrictMode>

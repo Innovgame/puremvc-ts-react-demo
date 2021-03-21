@@ -1,7 +1,10 @@
-import { INotification, SimpleCommand } from 'puremvc';
+import { MacroCommand } from 'puremvc';
+import { ModelPrepCommand } from './ModelPrepCommand';
+import { ViewPrepCommand } from './ViewPrepCommand';
 
-export class StartupCommand extends SimpleCommand {
-    excute(notication: INotification) {
-        console.log(notication);
+export class StartupCommand extends MacroCommand {
+    initializeMacroCommand(): void {
+        this.addCommand(ModelPrepCommand);
+        this.addCommand(ViewPrepCommand);
     }
 }

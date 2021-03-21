@@ -12,7 +12,7 @@ function App() {
                 marginTop: '150px',
             }}
         >
-            <div style={{ width: '500px' }}>
+            <div style={{ width: '300px' }}>
                 <Login />
             </div>
         </div>
