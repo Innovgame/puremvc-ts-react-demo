@@ -16,7 +16,7 @@ export class PrefsProxy extends Proxy {
     constructor() {
         super(PrefsProxy.NAME, TestPrefs);
 
-        console.log('PrefsProxy rendy');
+        // console.log('PrefsProxy rendy');
     }
 
     get prefsVO(): PrefsVO {

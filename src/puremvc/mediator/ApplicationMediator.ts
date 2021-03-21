@@ -12,7 +12,7 @@ export class ApplicationMediator extends Mediator {
     }
 
     onRegister(): void {
-        console.log('hahah');
+        console.log('ApplicationMediator onRegister');
         // this.app.hiddenLoading();
     }
 
@@ -24,8 +24,6 @@ export class ApplicationMediator extends Mediator {
     }
 
     handleNotification(notification: INotification): void {
-        console.log('ApplicationMediator listen');
-
         const notificationName = notification.getName();
         const body = notification.getBody();
 

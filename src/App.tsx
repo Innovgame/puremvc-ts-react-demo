@@ -5,19 +5,21 @@ import './App.css';
 import Login from './Login';
 import { Spin } from 'antd';
 
-class App extends React.PureComponent {
+type AppState = {
+    loading: boolean;
+};
+
+class App extends React.PureComponent<any, AppState> {
     constructor(props: any) {
         super(props);
+        this.state = {
+            loading: true,
+        };
         // console.log('app constructor');
     }
 
-    state = {
-        loading: true,
-    };
-
     componentDidMount() {
-        // TODO: ...
-        // console.log('app componentDidMount');
+        console.log('App componentDidMount');
         const facade = ApplicationFacade.getInstance();
         facade.startup(this);
         this.hiddenLoading();

@@ -27,7 +27,7 @@ class LoginPanel extends React.PureComponent<any, LoginPanelStats> {
             userPrefs: undefined,
         };
         this.facade = ApplicationFacade.getInstance();
-        console.log('login constructor');
+        // console.log('login constructor');
     }
 
     onFinish = (values: any) => {
@@ -59,7 +59,7 @@ class LoginPanel extends React.PureComponent<any, LoginPanelStats> {
     };
 
     componentDidMount = () => {
-        // console.log('login componentDidMount');
+        console.log('Login componentDidMount');
         this.facade.sendNotification(
             NotificationConstants.LOGIN_PANEL_MOUNT,
             this
