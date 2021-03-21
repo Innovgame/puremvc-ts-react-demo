@@ -53,7 +53,10 @@ export class LoginProxy extends Proxy {
             LoginService.sendLoginRequest(this.loginVO)
                 .then((token) => {
                     this.loginVO.authToken = token;
-                    this.sendNotification(NotificationConstants.LOGIN_SUCCESS);
+                    this.sendNotification(
+                        NotificationConstants.LOGIN_SUCCESS,
+                        token
+                    );
                 })
                 .catch((err) => {
                     this.sendNotification(NotificationConstants.LOGIN_FAILED);

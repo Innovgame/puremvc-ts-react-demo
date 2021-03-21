@@ -9,4 +9,6 @@ export enum NotificationConstants {
 
     LOGIN = 'login',
     LOGOUT = 'logout',
+
+    USER_PREFS = 'user_prefs',
 }

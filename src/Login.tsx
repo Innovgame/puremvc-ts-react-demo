@@ -3,6 +3,7 @@ import { Form, Input, Button, Checkbox, Spin } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { ApplicationFacade } from './puremvc';
 import { NotificationConstants } from './puremvc/constants';
+import { PrefsVO } from './puremvc/proxy';
 
 enum LoginStatus {
     Idle = 'Idle',
@@ -13,17 +14,18 @@ enum LoginStatus {
 
 type LoginPanelStats = {
     status: LoginStatus;
+    userPrefs?: PrefsVO;
 };
 
 class LoginPanel extends React.PureComponent<any, LoginPanelStats> {
     facade: ApplicationFacade;
 
-    state = {
-        status: LoginStatus.Idle,
-    };
-
     constructor(props: any) {
         super(props);
+        this.state = {
+            status: LoginStatus.Idle,
+            userPrefs: undefined,
+        };
         this.facade = ApplicationFacade.getInstance();
         console.log('login constructor');
     }
@@ -47,6 +49,12 @@ class LoginPanel extends React.PureComponent<any, LoginPanelStats> {
     onLoginSuccess = () => {
         this.setState({
             status: LoginStatus.Success,
+        });
+    };
+
+    onGetUserPrefs = (prefs: PrefsVO) => {
+        this.setState({
+            userPrefs: prefs,
         });
     };
 
@@ -147,14 +155,26 @@ class LoginPanel extends React.PureComponent<any, LoginPanelStats> {
     };
 
     render() {
-        const { status } = this.state;
+        const { status, userPrefs } = this.state;
 
         const loginForm = this.LoginForm(status);
         const StatusResult =
             status === LoginStatus.Failed ? (
-                <div>登录失败</div>
+                <h1>登录失败</h1>
             ) : status === LoginStatus.Success ? (
-                <div>登录成功</div>
+                <div>
+                    <h1>登录成功</h1>
+                    <div>姓名：{userPrefs?.username}</div>
+                    <div>年龄：{userPrefs?.age}</div>
+                    <div>
+                        爱好：
+                        <ul>
+                            {userPrefs?.likes.map((like, i) => (
+                                <li key={i}>{like}</li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
             ) : null;
 
         return (

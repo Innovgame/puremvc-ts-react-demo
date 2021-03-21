@@ -21,11 +21,13 @@ export class LoginMediator extends Mediator {
         return [
             NotificationConstants.LOGIN_FAILED,
             NotificationConstants.LOGIN_SUCCESS,
+            NotificationConstants.USER_PREFS,
         ];
     }
 
     handleNotification(notification: INotification): void {
         const notificationName = notification.getName();
+        const body = notification.getBody();
 
         switch (notificationName) {
             case NotificationConstants.LOGIN_SUCCESS:
@@ -33,6 +35,9 @@ export class LoginMediator extends Mediator {
                 break;
             case NotificationConstants.LOGIN_FAILED:
                 this.loginPanel.onLoginFailed();
+                break;
+            case NotificationConstants.USER_PREFS:
+                this.loginPanel.onGetUserPrefs(body);
                 break;
 
             default:

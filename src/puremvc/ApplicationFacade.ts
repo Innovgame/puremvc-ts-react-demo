@@ -1,6 +1,5 @@
 import { Facade } from 'puremvc';
-import { StartupCommand } from './command';
-import { LoginCommand } from './command/LoginCommand';
+import { StartupCommand, UserPrefsCommand, LoginCommand } from './command';
 import { NotificationConstants } from './constants';
 
 export class ApplicationFacade extends Facade {
@@ -21,5 +20,9 @@ export class ApplicationFacade extends Facade {
         super.initializeController();
         this.registerCommand(NotificationConstants.START_UP, StartupCommand);
         this.registerCommand(NotificationConstants.LOGIN, LoginCommand);
+        this.registerCommand(
+            NotificationConstants.LOGIN_SUCCESS,
+            UserPrefsCommand
+        );
     }
 }
