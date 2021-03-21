@@ -26,18 +26,36 @@ class LoginPanel extends React.PureComponent<any, LoginPanelStats> {
         super(props);
         this.facade = ApplicationFacade.getInstance();
         console.log('login constructor');
-        this.facade.sendNotification(
-            NotificationConstants.LOGIN_PANEL_MOUNT,
-            this
-        );
     }
 
     onFinish = (values: any) => {
-        console.log('Received values of form: ', values);
+        const { username, password } = values;
+
+        this.facade.sendNotification(NotificationConstants.LOGIN, {
+            username,
+            password,
+        });
+        this.setState({ status: LoginStatus.Pedding });
+    };
+
+    onLoginFailed = () => {
+        this.setState({
+            status: LoginStatus.Failed,
+        });
+    };
+
+    onLoginSuccess = () => {
+        this.setState({
+            status: LoginStatus.Success,
+        });
     };
 
     componentDidMount = () => {
         // console.log('login componentDidMount');
+        this.facade.sendNotification(
+            NotificationConstants.LOGIN_PANEL_MOUNT,
+            this
+        );
     };
 
     componentWillUnmount() {

@@ -1,5 +1,5 @@
 import { INotification, SimpleCommand } from 'puremvc';
-import { PrefsProxy, SearchProxy, UsersProxy } from '../proxy';
+import { PrefsProxy, SearchProxy, UsersProxy, LoginProxy } from '../proxy';
 
 export class ModelPrepCommand extends SimpleCommand {
     execute(notification: INotification): void {
@@ -8,5 +8,6 @@ export class ModelPrepCommand extends SimpleCommand {
         this.facade.registerProxy(new SearchProxy());
         this.facade.registerProxy(new PrefsProxy());
         this.facade.registerProxy(new UsersProxy());
+        this.facade.registerProxy(new LoginProxy());
     }
 }

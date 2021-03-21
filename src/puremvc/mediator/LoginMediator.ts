@@ -10,7 +10,11 @@ export class LoginMediator extends Mediator {
     }
 
     onRegister(): void {
-        console.log('sssd');
+        console.log('LoginMediator onRegister');
+    }
+
+    onRemove(): void {
+        console.log('LoginMediator onRemove');
     }
 
     listNotificationInterests(): string[] {
@@ -25,9 +29,12 @@ export class LoginMediator extends Mediator {
 
         switch (notificationName) {
             case NotificationConstants.LOGIN_SUCCESS:
+                this.loginPanel.onLoginSuccess();
                 break;
             case NotificationConstants.LOGIN_FAILED:
+                this.loginPanel.onLoginFailed();
                 break;
+
             default:
                 break;
         }

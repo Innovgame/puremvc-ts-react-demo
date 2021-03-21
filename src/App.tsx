@@ -8,8 +8,6 @@ import { Spin } from 'antd';
 class App extends React.PureComponent {
     constructor(props: any) {
         super(props);
-        const facade = ApplicationFacade.getInstance();
-        facade.startup(this);
         // console.log('app constructor');
     }
 
@@ -20,6 +18,8 @@ class App extends React.PureComponent {
     componentDidMount() {
         // TODO: ...
         // console.log('app componentDidMount');
+        const facade = ApplicationFacade.getInstance();
+        facade.startup(this);
         this.hiddenLoading();
     }
 
