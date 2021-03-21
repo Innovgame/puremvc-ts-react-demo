@@ -24,14 +24,16 @@ const TestUser: LoginVO = {
 class LoginService {
     static sendLoginRequest(loginVO: LoginVO) {
         return new Promise<string>((resolve, reject) => {
-            if (
-                loginVO.username === TestUser.username &&
-                loginVO.password === TestUser.password
-            ) {
-                resolve(TestUser.authToken!);
-            } else {
-                reject('login failed');
-            }
+            setTimeout(() => {
+                if (
+                    loginVO.username === TestUser.username &&
+                    loginVO.password === TestUser.password
+                ) {
+                    resolve(TestUser.authToken!);
+                } else {
+                    reject('login failed');
+                }
+            }, 3000);
         });
     }
 }
