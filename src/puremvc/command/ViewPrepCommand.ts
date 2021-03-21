@@ -1,11 +1,15 @@
-import { INotification, SimpleCommand } from 'puremvc';
+import { INotification, MacroCommand, SimpleCommand } from 'puremvc';
 import { ApplicationMediator } from '../mediator';
 
-export class ViewPrepCommand extends SimpleCommand {
+class InitAppMediatorCommand extends SimpleCommand {
     execute(notification: INotification): void {
-        console.log('ViewPrepCommand excute');
-
         const app = notification.getBody();
         this.facade.registerMediator(new ApplicationMediator(app));
+    }
+}
+
+export class ViewPrepCommand extends MacroCommand {
+    initializeMacroCommand() {
+        this.addCommand(InitAppMediatorCommand);
     }
 }

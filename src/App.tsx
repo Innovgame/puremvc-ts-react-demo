@@ -6,14 +6,20 @@ import Login from './Login';
 import { Spin } from 'antd';
 
 class App extends React.PureComponent {
+    constructor(props: any) {
+        super(props);
+        const facade = ApplicationFacade.getInstance();
+        facade.startup(this);
+        // console.log('app constructor');
+    }
+
     state = {
         loading: true,
     };
 
     componentDidMount() {
         // TODO: ...
-        const facade = ApplicationFacade.getInstance();
-        facade.startup(this);
+        // console.log('app componentDidMount');
     }
 
     hiddenLoading = () => {
@@ -32,13 +38,11 @@ class App extends React.PureComponent {
                     marginTop: '150px',
                 }}
             >
-                {loading ? (
-                    <Spin />
-                ) : (
+                <Spin tip="Loading..." spinning={loading}>
                     <div style={{ width: '300px' }}>
                         <Login />
                     </div>
-                )}
+                </Spin>
             </div>
         );
     }
