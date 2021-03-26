@@ -11,10 +11,21 @@ export class LoginMediator extends Mediator {
 
     onRegister(): void {
         console.log('LoginMediator onRegister');
+
+        // register view component event
+        this.loginPanel.eventsMap['onTryLogin'] = this.onTryLogin.bind(this);
     }
 
     onRemove(): void {
         console.log('LoginMediator onRemove');
+    }
+
+    onTryLogin(params: { username: string; password: string }): void {
+        const { username, password } = params;
+        this.facade.sendNotification(NotificationConstants.LOGIN, {
+            username,
+            password,
+        });
     }
 
     listNotificationInterests(): string[] {

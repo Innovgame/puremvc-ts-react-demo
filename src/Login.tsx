@@ -19,6 +19,7 @@ type LoginPanelStats = {
 
 class LoginPanel extends React.PureComponent<any, LoginPanelStats> {
     facade: ApplicationFacade;
+    eventsMap: { [key: string]: Function } = {};
 
     constructor(props: any) {
         super(props);
@@ -27,26 +28,28 @@ class LoginPanel extends React.PureComponent<any, LoginPanelStats> {
             userPrefs: undefined,
         };
         this.facade = ApplicationFacade.getInstance();
-        // console.log('login constructor');
     }
 
     onFinish = (values: any) => {
         const { username, password } = values;
 
-        this.facade.sendNotification(NotificationConstants.LOGIN, {
-            username,
-            password,
-        });
+        //TODO: 是否应该把逻辑放在Mediator中，通过再次一定一个观察者模式方式
+        if (this.eventsMap['onTryLogin']) {
+            this.eventsMap['onTryLogin']({ username, password });
+        }
         this.setState({ status: LoginStatus.Pedding });
+        //TODO: 是否应该把逻辑放在Mediator中，通过再次一定一个观察者模式方式
     };
 
     onLoginFailed = () => {
+        // TODO: 是否应该在Mediator中定义一个对应的接口约束，viewComponent实现对应的接口onLoginFailed
         this.setState({
             status: LoginStatus.Failed,
         });
     };
 
     onLoginSuccess = () => {
+        // TODO: 是否应该在Mediator中定义一个对应的接口约束，viewComponent实现对应的接口onLoginSuccess
         this.setState({
             status: LoginStatus.Success,
         });
@@ -60,6 +63,7 @@ class LoginPanel extends React.PureComponent<any, LoginPanelStats> {
 
     componentDidMount = () => {
         console.log('Login componentDidMount');
+        // TODO: 将使用event 通知mediator
         this.facade.sendNotification(
             NotificationConstants.LOGIN_PANEL_MOUNT,
             this
@@ -67,7 +71,7 @@ class LoginPanel extends React.PureComponent<any, LoginPanelStats> {
     };
 
     componentWillUnmount() {
-        // TOOD:
+        // TODO: 将使用event 通知mediator
         this.facade.sendNotification(
             NotificationConstants.LOGIN_PANEL_UNMOUNT,
             this
